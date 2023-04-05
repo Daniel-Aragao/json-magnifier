@@ -3,17 +3,22 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Interactive JSON reader",
-  "main": "index.js",
+  "main": "run.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node run.js",
+    "build": "webpack --mode=development"
   },
   "keywords": [
     "json"
   ],
   "author": "daniel-filho",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "json-query": "^2.2.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
   }
 }

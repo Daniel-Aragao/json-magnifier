@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON magnifier</title>
+</head>
+<body>
+
+    <input type="file" name="jsonFile " id="jsonFile">
+    <textarea name="json-data" id="data" cols="50" rows="30" placeholder="Data..."></textarea>
+    <input name="json-data" id="query" placeholder="Query..."></input>
+    <label for="toCount"><input type="checkbox" name="toCount" id="toCount">Count</label>
+    <button onclick="runCode()">Run</button>
+
+    <div id="result"></div>
+
+    <script >
+        let fileInput = undefined;
+
+        function runCode() {
+            let parsedData = magnifier.runQuery(data.value || fileInput, query.value, {count:toCount.checked})
+            result.innerText = JSON.stringify(parsedData, "<br/>", 4);
+        }
+
+        document.getElementById('jsonFile')
+            .addEventListener('change', function() {
+            
+                var fr=new FileReader();
+                fr.onload=function(){
+                    fileInput=fr.result;
+                }
+                
+                fr.readAsText(this.files[0]);
+            })
+    </script>
+    
+    <script src="dist/bundle.js"></script>
+</body>
+</html>
