@@ -1,0 +1,19 @@
+{
+  "name": "json-magnifier",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Interactive JSON reader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "json"
+  ],
+  "author": "daniel-filho",
+  "license": "ISC",
+  "devDependencies": {
+    "json-query": "^2.2.2"
+  }
+}
