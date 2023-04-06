@@ -8,8 +8,24 @@ function addOrCount(obj, key) {
     obj[key]++;
 }
 
+const helpers = {
+    select: function (input) {
+        if (Array.isArray(input)) {
+          var keys = [].slice.call(arguments, 1)
+          return input.map(function (item) {
+            return Object.keys(item).reduce(function (result, key) {
+              if (~keys.indexOf(key)) {
+                result[key] = item[key]
+              }
+              return result
+            }, {})
+          })
+        }
+      }
+}
+
 export function runQuery(data, query, args) {
-    let result = jsonQuery(query, {data: JSON.parse(data)}).value;
+    let result = jsonQuery(query, {data: JSON.parse(data), locals: helpers}).value;
     
     if(args.count && Array.isArray(result)) {
         

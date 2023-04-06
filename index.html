@@ -45,13 +45,23 @@
         let fileInput = undefined;
 
         function runCode() {
-            let parsedData = magnifier.runQuery(data.value || fileInput, query.value, {count:toCount.checked})
-            result.innerText = JSON.stringify(parsedData, undefined, 2);
+            try {
+                let parsedData = magnifier.runQuery(data.value || fileInput, query.value, {count:toCount.checked})
+                result.innerText = JSON.stringify(parsedData, undefined, 2);
+            } catch (e) {
+                result.innerText = "Error running query";
+                console.error(e);
+            }
         }
         
         function load() {
-            const badjson = JSON.parse(fileInput);
-            data.value = JSON.stringify(badjson, undefined, 2);
+            try {
+                const badjson = JSON.parse(fileInput);
+                data.value = JSON.stringify(badjson, undefined, 2);
+            } catch (e) {
+                data.value = "Error parsing JSON";
+                console.error(e);
+            }
         }
 
         function reset() {
@@ -59,6 +69,7 @@
             result.innerText = "";
             query.value = "";
             toCount.checked = false;
+            jsonFile.value = "";
         }
 
         document.getElementById('jsonFile')
