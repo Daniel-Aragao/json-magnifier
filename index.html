@@ -1,107 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON magnifier</title>
-    <link rel="icon" type="image/x-icon" href="./browser.png">
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-    <div class="header"><img src="./browser.png" alt=""> Json Magnifier</div>
-    <div class="container">
-        <div class="row">
-            <textarea class="queryArea" type="text" name="json-data" id="query" placeholder="Query..."></textarea>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>JSON magnifier</title>
+        <link rel="icon" type="image/x-icon" href="./browser.png" />
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <div class="header">
+            <img src="./browser.png" alt="" /> Json Magnifier
         </div>
-        <div class="box-container">
-            <div class="box">
-                <span>
-                    <button onclick="runCode()">
-                        <span class="icon-group">
-                            <img src="./icons/play.png" class="icon"> 
-                            Run
-                        </span>
-                    </button>
-                    <label for="toCount" title="Accumulate string and object lists"><input type="checkbox" name="toCount" id="toCount">Count</label>
-
-                </span>
+        <div class="container">
+            <div class="row">
+                <textarea
+                    class="queryArea"
+                    type="text"
+                    name="json-data"
+                    id="query"
+                    placeholder="Query..."
+                ></textarea>
             </div>
-            <div class="box">
-                <span>
-                    <button id="loadFile" onclick="load()" title="Loads file into text area" disabled>
-                        <img src="./icons/edit.png" class="icon"> 
-                    </button>
-                    <button onclick="jsonFile.click()" title="Loads file into text area">
-                        <img src="./icons/file.png" class="icon"> 
-                    </button>
+            <div class="box-container">
+                <div class="box">
+                    <span>
+                        <button onclick="runCode()">
+                            <span class="icon-group">
+                                <img src="./icons/play.png" class="icon" />
+                                Run
+                            </span>
+                        </button>
+                        <label
+                            for="toCount"
+                            title="Accumulate string and object lists"
+                            ><input
+                                type="checkbox"
+                                name="toCount"
+                                id="toCount"
+                            />Count</label
+                        >
+                    </span>
+                </div>
+                <div class="box">
+                    <span>
+                        <button
+                            id="loadFile"
+                            onclick="load()"
+                            title="Loads file into text area"
+                            disabled
+                        >
+                            <img src="./icons/edit.png" class="icon" />
+                        </button>
+                        <button
+                            onclick="jsonFile.click()"
+                            title="Loads file into text area"
+                        >
+                            <img src="./icons/file.png" class="icon" />
+                        </button>
+                    </span>
 
-                </span>
-
-                <input type="file" name="jsonFile " id="jsonFile" accept=".json" hidden>
+                    <input
+                        type="file"
+                        name="jsonFile "
+                        id="jsonFile"
+                        accept=".json"
+                        hidden
+                    />
+                </div>
+                <div class="box">
+                    <span>
+                        <button onclick="reset()" title="Reset all">
+                            <img src="./icons/reset.png" class="icon" />
+                        </button>
+                    </span>
+                </div>
             </div>
-            <div class="box">
-                <span>
-                    <button onclick="reset()" title="Reset all">
-                        <img src="./icons/reset.png" class="icon"> 
-                    </button>
-
-                </span>
+            <div class="double-panel">
+                <textarea
+                    class="dataArea"
+                    name="json-data"
+                    id="data"
+                    placeholder="Data..."
+                ></textarea>
+                <pre id="result"></pre>
             </div>
         </div>
-        <div class="double-panel">
-            <textarea class="dataArea" name="json-data" id="data" placeholder="Data..."></textarea>
-            <pre id="result"></pre>
-        </div>
-    </div>
 
+        <script>
+            let fileInput = undefined;
 
-    <script >
-        let fileInput = undefined;
-
-        function runCode() {
-            try {
-                let parsedData = magnifier.runQuery(data.value || fileInput, query.value, {count:toCount.checked})
-                result.innerText = JSON.stringify(parsedData, undefined, 2);
-            } catch (e) {
-                result.innerText = "Error running query";
-                console.error(e);
-            }
-        }
-        
-        function load() {
-            try {
-                const badjson = JSON.parse(fileInput);
-                data.value = JSON.stringify(badjson, undefined, 2);
-            } catch (e) {
-                data.value = "Error parsing JSON file";
-                console.error(e);
-            }
-        }
-
-        function reset() {
-            data.value = "";
-            result.innerText = "";
-            query.value = "";
-            toCount.checked = false;
-            jsonFile.value = "";
-            loadFile.disabled = true;
-            fileInput = undefined;
-        }
-
-        document.getElementById('jsonFile')
-            .addEventListener('change', function() {
-            
-                var fr=new FileReader();
-                fr.onload=function(){
-                    fileInput=fr.result;
-                    loadFile.disabled = false;
+            function runCode() {
+                try {
+                    let parsedData = magnifier.runQuery(
+                        data.value || fileInput,
+                        query.value,
+                        { count: toCount.checked }
+                    );
+                    result.innerText = JSON.stringify(parsedData, undefined, 2);
+                } catch (e) {
+                    result.innerText = "Error running query";
+                    console.error(e);
                 }
-                
-                fr.readAsText(this.files[0]);
-            })
-    </script>
-    
-    <script src="dist/bundle.js"></script>
-</body>
+            }
+
+            function load() {
+                try {
+                    const badjson = JSON.parse(fileInput);
+                    data.value = JSON.stringify(badjson, undefined, 2);
+                } catch (e) {
+                    data.value = "Error parsing JSON file";
+                    console.error(e);
+                }
+            }
+
+            function reset() {
+                data.value = "";
+                result.innerText = "";
+                query.value = "";
+                toCount.checked = false;
+                jsonFile.value = "";
+                loadFile.disabled = true;
+                fileInput = undefined;
+            }
+
+            document
+                .getElementById("jsonFile")
+                .addEventListener("change", function () {
+                    var fr = new FileReader();
+                    fr.onload = function () {
+                        fileInput = fr.result;
+                        loadFile.disabled = false;
+                    };
+
+                    fr.readAsText(this.files[0]);
+                });
+        </script>
+
+        <script src="dist/bundle.js"></script>
+    </body>
 </html>
