@@ -1,0 +1,88 @@
+:root{
+    --input-bg:#161b22;
+    --main-bg:#0d1116;
+    --main-bg-darker: #11151a;
+    --border-color: #30363d;
+    --color-btn-bg: #21262d;
+}
+html, body {
+    background-color: var(--main-bg);
+    color: white
+}
+div.container {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+div.column {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    flex-wrap: wrap;
+}
+div.row {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+div.flex-between{
+    align-items: center;
+    justify-content: space-between;
+}
+div.flex-start{
+    align-items: flex-start;
+}
+textarea, input[type=text] {
+    background-color: var(--input-bg);
+    color: white;
+    border: 1px solid var(--border-color);
+}
+input[type=text] {
+    height: 30.5px;
+    padding: 0 8px;
+}
+input[type="checkbox"]{
+    accent-color: var(--border-color);
+}
+::placeholder {
+    color: whitesmoke;
+}
+button, input[type=file]::file-selector-button {
+    color: white;
+    padding: 6px 14px;
+    border: 1.5px solid;
+    cursor: pointer;
+    background-color: var(--color-btn-bg);
+    border-color: var(--border-color);
+    border-radius: 6px;
+}
+button:hover, input[type=file]::file-selector-button:hover{
+    background-color: var(--border-color);
+}
+
+textarea,#result{
+    align-self: stretch;
+    min-width: 100px;
+    min-height: 500px;
+    background-color: var(--input-bg);
+}
+
+#result{
+    padding: 2px;
+    border: 1px solid;
+    border-color: var(--border-color);
+    background-color: var(--main-bg-darker);
+    margin: 0;
+}
+
+.double-panel {
+    display: flex;
+}
