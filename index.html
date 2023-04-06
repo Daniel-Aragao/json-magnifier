@@ -11,33 +11,48 @@
 <body>
     <div class="header"><img src="./browser.png" alt=""> Json Magnifier</div>
     <div class="container">
-        <div class="row flex-between">
-            <div>
-                <input type="text" name="json-data" id="query" placeholder="Query..."></input>
-                <label for="toCount"><input type="checkbox" name="toCount" id="toCount">Count</label>
-                <button onclick="runCode()">Run</button>
+        <div class="row">
+            <textarea class="queryArea" type="text" name="json-data" id="query" placeholder="Query..."></textarea>
+        </div>
+        <div class="box-container">
+            <div class="box">
+                <span>
+                    <button onclick="runCode()">
+                        <span class="icon-group">
+                            <img src="./icons/play.png" class="icon"> 
+                            Run
+                        </span>
+                    </button>
+                    <label for="toCount" title="Accumulate string and object lists"><input type="checkbox" name="toCount" id="toCount">Count</label>
 
+                </span>
             </div>
-            <div>
-                <input type="file" name="jsonFile " id="jsonFile">
+            <div class="box">
+                <span>
+                    <button id="loadFile" onclick="load()" title="Loads file into text area" disabled>
+                        <img src="./icons/edit.png" class="icon"> 
+                    </button>
+                    <button onclick="jsonFile.click()" title="Loads file into text area">
+                        <img src="./icons/file.png" class="icon"> 
+                    </button>
+
+                </span>
+
+                <input type="file" name="jsonFile " id="jsonFile" accept=".json" hidden>
             </div>
-            <div>
-                <button onclick="load()" title="Loads file into text area">Load to input</button>
-                <button onclick="reset()" title="Reset all">Reset</button>
+            <div class="box">
+                <span>
+                    <button onclick="reset()" title="Reset all">
+                        <img src="./icons/reset.png" class="icon"> 
+                    </button>
+
+                </span>
             </div>
         </div>
         <div class="double-panel">
-            <textarea name="json-data" id="data" placeholder="Data..."></textarea>
+            <textarea class="dataArea" name="json-data" id="data" placeholder="Data..."></textarea>
             <pre id="result"></pre>
         </div>
-        <!-- <div class="row flex-start">
-            <div class="column">
-                <textarea name="json-data" id="data" placeholder="Data..."></textarea>
-            </div>
-            <div class="column">
-                <pre id="result"></pre>
-            </div>
-        </div> -->
     </div>
 
 
@@ -59,7 +74,7 @@
                 const badjson = JSON.parse(fileInput);
                 data.value = JSON.stringify(badjson, undefined, 2);
             } catch (e) {
-                data.value = "Error parsing JSON";
+                data.value = "Error parsing JSON file";
                 console.error(e);
             }
         }
@@ -70,6 +85,8 @@
             query.value = "";
             toCount.checked = false;
             jsonFile.value = "";
+            loadFile.disabled = true;
+            fileInput = undefined;
         }
 
         document.getElementById('jsonFile')
@@ -78,6 +95,7 @@
                 var fr=new FileReader();
                 fr.onload=function(){
                     fileInput=fr.result;
+                    loadFile.disabled = false;
                 }
                 
                 fr.readAsText(this.files[0]);

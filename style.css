@@ -56,14 +56,14 @@ div.container {
 div.column {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
     flex: 1;
     flex-wrap: wrap;
 }
 div.row {
     display: flex;
-    gap: 5px;
-    margin-bottom: 5px;
+    gap: 10px;
+    margin-bottom: 10px;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
@@ -76,28 +76,36 @@ div.flex-between {
 div.flex-start {
     align-items: flex-start;
 }
-textarea,
-input[type="text"] {
+.dataArea,
+.queryArea {
     background-color: var(--input-bg);
     color: white;
     border: 1px solid var(--border-color);
 }
 
-textarea:focus, input[type="text"]:focus {
+.dataArea:focus,
+.queryArea:focus {
     outline: none !important;
-    border: 1px solid ;
-    border-image: linear-gradient(var(--gradient-color-1),var(--gradient-color-2), var(--gradient-color-3)) 30;
+    border: 1px solid;
+    border-image: linear-gradient(
+            var(--gradient-color-1),
+            var(--gradient-color-2),
+            var(--gradient-color-3)
+        )
+        30;
     box-shadow: 0px 0px 3px 0 var(--gradient-color-1),
-    0px 0px 3px 0 var(--gradient-color-2),
-    0px 0px 3px 0 var(--gradient-color-3) ;
+        0px 0px 3px 0 var(--gradient-color-2),
+        0px 0px 3px 0 var(--gradient-color-3);
 }
 
-input[type="text"] {
-    height: 30.5px;
+.queryArea {
+    height: 70px;
+    width: 100%;
     padding: 0 8px;
+    resize: none;
 }
 input[type="checkbox"] {
-    accent-color: var(--border-color);
+    accent-color: var(--gradient-color-2);
 }
 ::placeholder {
     color: whitesmoke;
@@ -117,7 +125,26 @@ input[type="file"]::file-selector-button:hover {
     background-color: var(--border-color);
 }
 
-textarea,
+button:disabled {
+    cursor: initial;
+    background-color: var(--main-bg-darker);
+    border-color: var(--main-bg-darker);
+}
+
+.icon-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+img.icon {
+    filter: invert(1);
+    width: 15px;
+    height: 15px;
+}
+
+.dataArea,
 #result {
     align-self: stretch;
     min-width: 100px;
@@ -136,7 +163,7 @@ textarea,
 .double-panel {
     display: flex;
     width: 100%;
-    gap: 5px;
+    gap: 10px;
 }
 
 .double-panel > * {
@@ -153,4 +180,23 @@ div.header {
     margin-bottom: 20px;
     padding: 0 10px;
     gap: 10px;
+}
+
+.box-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.box:first-child > span {
+    margin-right: auto;
+}
+
+.box:last-child > span {
+    margin-left: auto;
 }
