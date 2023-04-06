@@ -1,13 +1,49 @@
-:root{
-    --input-bg:#161b22;
-    --main-bg:#0d1116;
+:root {
+    --input-bg: #161b22;
+    --main-bg: #0d1116;
     --main-bg-darker: #11151a;
     --border-color: #30363d;
     --color-btn-bg: #21262d;
+    --border-radius: 6px;
+    --gradient-color-1: #e36a34;
+    --gradient-color-2: #c65356;
+    --gradient-color-3: #e14a96;
 }
-html, body {
+
+/* Scroll bar */
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+/* Corner */
+::-webkit-scrollbar-corner {
+    background: rgba(0, 0, 0, 0);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--main-bg);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-btn-bg);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-color);
+}
+
+html,
+body {
     background-color: var(--main-bg);
-    color: white
+    color: white;
+    margin: 0;
 }
 div.container {
     margin: auto;
@@ -33,49 +69,63 @@ div.row {
     width: 100%;
     flex-wrap: wrap;
 }
-div.flex-between{
+div.flex-between {
     align-items: center;
     justify-content: space-between;
 }
-div.flex-start{
+div.flex-start {
     align-items: flex-start;
 }
-textarea, input[type=text] {
+textarea,
+input[type="text"] {
     background-color: var(--input-bg);
     color: white;
     border: 1px solid var(--border-color);
 }
-input[type=text] {
+input[type="text"] {
     height: 30.5px;
     padding: 0 8px;
 }
-input[type="checkbox"]{
+input[type="checkbox"] {
     accent-color: var(--border-color);
 }
 ::placeholder {
     color: whitesmoke;
 }
-button, input[type=file]::file-selector-button {
+button,
+input[type="file"]::file-selector-button {
     color: white;
     padding: 6px 14px;
     border: 1.5px solid;
     cursor: pointer;
     background-color: var(--color-btn-bg);
     border-color: var(--border-color);
-    border-radius: 6px;
+    border-radius: var(--border-radius);
 }
-button:hover, input[type=file]::file-selector-button:hover{
+button:hover,
+input[type="file"]::file-selector-button:hover {
     background-color: var(--border-color);
 }
 
-textarea,#result{
+textarea:focus {
+    outline: none !important;
+    border: 1px solid ;
+    border-image: linear-gradient(var(--gradient-color-1),var(--gradient-color-2), var(--gradient-color-3)) 30;
+    /* border-width: 1px;
+    border-style: solid; */
+    box-shadow: 0px 0px 3px 0 var(--gradient-color-1),
+    0px 0px 3px 0 var(--gradient-color-2),
+    0px 0px 3px 0 var(--gradient-color-3) ;
+}
+textarea,
+#result {
     align-self: stretch;
     min-width: 100px;
     min-height: 500px;
     background-color: var(--input-bg);
 }
 
-#result{
+#result {
     padding: 2px;
     border: 1px solid;
     border-color: var(--border-color);
@@ -85,4 +135,23 @@ textarea,#result{
 
 .double-panel {
     display: flex;
+    width: 100%;
+    gap: 5px;
+}
+
+.double-panel > * {
+    flex: 1;
+    overflow: auto;
+}
+
+div.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 60px;
+    background-color: var(--input-bg);
+    margin-bottom: 20px;
+    padding: 0 10px;
+    gap: 10px;
 }

@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSON magnifier</title>
-    <link rel="icon" type="image/x-icon" href="/browser.png">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" type="image/x-icon" href="./browser.png">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <div class="header"><img src="./browser.png" alt=""> Json Magnifier</div>
     <div class="container">
         <div class="row flex-between">
             <div>
@@ -21,20 +22,22 @@
                 <input type="file" name="jsonFile " id="jsonFile">
             </div>
             <div>
-                <button onclick="load()" title="Loads file into text area">Load</button>
+                <button onclick="load()" title="Loads file into text area">Load to input</button>
                 <button onclick="reset()" title="Reset all">Reset</button>
             </div>
         </div>
-        <div class="row flex-start">
-            <!-- <textarea name="json-data" id="data" placeholder="Data..."></textarea>
-            <div id="result"></div> -->
+        <div class="double-panel">
+            <textarea name="json-data" id="data" placeholder="Data..."></textarea>
+            <pre id="result"></pre>
+        </div>
+        <!-- <div class="row flex-start">
             <div class="column">
                 <textarea name="json-data" id="data" placeholder="Data..."></textarea>
             </div>
             <div class="column">
                 <pre id="result"></pre>
             </div>
-        </div>
+        </div> -->
     </div>
 
 
