@@ -1,9 +1,29 @@
 # Json magnifier
 
-This projects purpose is to provide a simple script to run queries on json files without the need of using unknown websites. It can also be hosted as a web project
+This projects purpose is to provide a simple script to run queries on json files without the need of using untrustworthy websites. It can also be hosted as a web project
 
-> The project might also be found in [web version](https://daniel-aragao.github.io/json-magnifier/)  
+> The project might also be found in [web version](https://daniel-aragao.github.io/json-magnifier/)
 
+## Web version
+
+Hosted as a github page you can
+1. Load the JSON file
+2. or paste the JSON data directly in the `Data...` field
+3. or even edit the loaded JSON file by click one button
+4. Write a query
+5. Get the results by pressing `Run`
+   1. If there is a large dataset been imported you can also click on `Count` to group list of strings of list of objects
+
+> Be aware that large files may cause your browser to slowdown and may not be suited for editing. In this case if using a list you can first query by "[1]" to filter a single item to help you build the query
+
+![guide](/misc/imgs/guide.png)
+
+Sample of query
+![guide](/misc/imgs/sample%201.png)
+Sample of `Count`
+![guide](/misc/imgs/sample%202.png)
+
+Credits to [SWAPI](https://swapi.dev/) for the data used
 ## Dependencies
 
 * json-query@^2.2.2

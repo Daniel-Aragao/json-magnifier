@@ -182,6 +182,15 @@ div.header {
     gap: 10px;
 }
 
+div.header .icon {
+    width: 24px;
+    height: 24px;
+}
+
+div.header > a {
+    margin-left: auto;
+}
+
 .box-container {
     display: flex;
     width: 100%;
