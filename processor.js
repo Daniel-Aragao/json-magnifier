@@ -21,6 +21,26 @@ const helpers = {
             }, {})
           })
         }
+      },
+      first: function (input, key) {
+        console.log(input, key)
+        if(Array.isArray(input)) {
+          if(Array.isArray(input[0][key])) {
+            return input.map(item => item[key][0])
+          }
+        }
+
+        return input;
+      },
+      last: function (input, key) {
+        console.log(input, key)
+        if(Array.isArray(input)) {
+          if(Array.isArray(input[0][key])) {
+            return input.map(item => item[key][item[key].length - 1])
+          }
+        }
+
+        return input;
       }
 }
 
