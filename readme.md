@@ -173,7 +173,7 @@ Here are the added helpers
 
 ### :select
 
-Generate new objects
+Generate new objects with the selected fields
 
 ```text
 :select(name)
@@ -193,5 +193,22 @@ Generate new objects
   {
     "name": "Darth Vader"
   }
+]
+```
+
+### :first and :last
+
+If the informed field is an array pick the first or last item of the field
+
+```text
+:first(films)
+```
+
+```JSON
+[
+  "https://swapi.dev/api/films/1/",
+  "https://swapi.dev/api/films/1/",
+  "https://swapi.dev/api/films/1/",
+  "https://swapi.dev/api/films/1/"
 ]
 ```
