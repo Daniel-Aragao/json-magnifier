@@ -57,6 +57,7 @@ body {
     background-color: var(--main-bg);
     color: white;
     margin: 0;
+    height: 100%;
 }
 div.container {
     margin: auto;
@@ -65,6 +66,8 @@ div.container {
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 0 10px;
+    width: 90%;
+    max-width: 1200px;
 }
 div.column {
     display: flex;
