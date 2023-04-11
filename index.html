@@ -25,6 +25,9 @@
                     placeholder="Query..."
                 ></textarea>
             </div>
+            <div class="row hidden" id="hiddenInfoContainer">
+                <pre id="hiddenInfo"></pre>
+            </div>
             <div class="box-container">
                 <div class="box">
                     <span>
@@ -92,6 +95,9 @@
                     <button onclick="copy()" title="Copy" class="copyButton">
                         <img src="./icons/copy.png" class="icon">
                     </button>
+                    <button onclick="showInfo()" title="List information" class="copyButton">
+                        <img src="./icons/information.png" class="icon">
+                    </button>
                     <pre class="resultContainer" id="result"></pre>
                 </div>
             </div>
@@ -99,6 +105,9 @@
 
         <script>
             let fileInput = undefined;
+            let loadedData = undefined;
+            let inputData = undefined;
+
             const LAST_QUERY = "LAST_QUERY";
             const LAST_QUERY_COUNT = "LAST_QUERY_COUNT";
             const LAST_QUERY_JSON = "LAST_QUERY_COUNT_JSON";
@@ -106,13 +115,16 @@
             function runCode() {
                 try {
                     saveLastQuery();
+                    inputData = data.value || fileInput;
 
-                    let parsedData = magnifier.runQuery(
-                        data.value || fileInput,
+                    loadedData = magnifier.runQuery(
+                        inputData,
                         query.value,
                         { count: toCount.checked }
                     );
-                    result.innerText = JSON.stringify(parsedData, undefined, 2);
+
+                    result.innerText = JSON.stringify(loadedData, undefined, 2);
+                    updateInfo();
                 } catch (e) {
                     result.innerText = "Error running query";
                     console.error(e);
@@ -165,6 +177,39 @@
                     setTimeout(() => {
                         btn.classList.remove("positiveHightlight");
                     }, 1000);
+                }
+            }
+
+            function showInfo() {
+                if(hiddenInfoContainer.classList.contains("hidden")) {
+                    hiddenInfoContainer.classList.remove("hidden");
+                    updateInfo();
+                } else {
+                    hiddenInfoContainer.classList.add("hidden");
+                }
+            }
+
+            function updateInfo() {
+                if(Array.isArray(loadedData) || (loadedData && toCount.checked) || Array.isArray(inputData)) {
+                    const info = {resultSize:  "N/A", inputSize: "N/A" };
+
+                    if(Array.isArray(loadedData)) {
+                        info.resultSize = loadedData.length;
+                    } else if(loadedData && toCount.checked) {
+                        let acc = 0;
+
+                        for(let i in loadedData) {
+                            acc += loadedData[i];
+                        }
+
+                        info.resultSize = acc;
+                    }
+                    if(Array.isArray(inputData)) {
+                        info.inputSize = inputData.length;
+                    }
+                    hiddenInfo.innerText = JSON.stringify(info, undefined, 2);
+                } else {
+                    hiddenInfo.innerText = "Information only available for lists"
                 }
             }
 
