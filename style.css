@@ -239,3 +239,7 @@ div.header > a {
 .box:last-child > span {
     margin-left: auto;
 }
+
+.toCount {
+    display: inline-flex;
+}
