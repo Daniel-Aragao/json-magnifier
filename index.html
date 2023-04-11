@@ -115,10 +115,10 @@
             function runCode() {
                 try {
                     saveLastQuery();
-                    inputData = data.value || fileInput;
+                    inputData = JSON.parse(data.value || fileInput);
 
                     loadedData = magnifier.runQuery(
-                        inputData,
+                        data.value || fileInput,
                         query.value,
                         { count: toCount.checked }
                     );
