@@ -56,8 +56,9 @@
                             <img src="./icons/edit.png" class="icon" />
                         </button>
                         <button
+                            id="uploadFile"
                             onclick="jsonFile.click()"
-                            title="Loads file into text area"
+                            title="Upload file"
                         >
                             <img src="./icons/file.png" class="icon" />
                         </button>
@@ -86,15 +87,25 @@
                     id="data"
                     placeholder="Data..."
                 ></textarea>
-                <pre id="result"></pre>
+                <div class="resultArea">
+                    <button onclick="copy()" title="Copy" class="copyButton">
+                        <img src="./icons/copy.png" class="icon">
+                    </button>
+                    <pre class="resultContainer" id="result"></pre>
+                </div>
             </div>
         </div>
 
         <script>
             let fileInput = undefined;
+            const LAST_QUERY = "LAST_QUERY";
+            const LAST_QUERY_COUNT = "LAST_QUERY_COUNT";
+            const LAST_QUERY_JSON = "LAST_QUERY_COUNT_JSON";
 
             function runCode() {
                 try {
+                    saveLastQuery();
+
                     let parsedData = magnifier.runQuery(
                         data.value || fileInput,
                         query.value,
@@ -105,6 +116,18 @@
                     result.innerText = "Error running query";
                     console.error(e);
                 }
+            }
+
+            function saveLastQuery() {
+                localStorage.setItem(LAST_QUERY, query.value);
+                localStorage.setItem(LAST_QUERY_COUNT, toCount.checked);
+                localStorage.setItem(LAST_QUERY_JSON, data.value);
+            }
+            
+            function loadLastQuery() {
+                query.value = localStorage.getItem(LAST_QUERY);
+                toCount.checked = localStorage.getItem(LAST_QUERY_COUNT) === "true";
+                data.value = localStorage.getItem(LAST_QUERY_JSON);
             }
 
             function load() {
@@ -125,19 +148,45 @@
                 jsonFile.value = "";
                 loadFile.disabled = true;
                 fileInput = undefined;
+
+                if(uploadFile.classList.contains("positiveHightlight")){
+                    uploadFile.classList.remove("positiveHightlight");
+                }
             }
 
-            document
-                .getElementById("jsonFile")
-                .addEventListener("change", function () {
-                    var fr = new FileReader();
-                    fr.onload = function () {
-                        fileInput = fr.result;
-                        loadFile.disabled = false;
-                    };
+            function copy() {
+                if(result.innerText?.trim()) {
+                    navigator.clipboard.writeText(result.innerText);
+                    const btn = document.getElementsByClassName("copyButton")[0];
+    
+                    btn.classList.add("positiveHightlight");
+                    
+                    setTimeout(() => {
+                        btn.classList.remove("positiveHightlight");
+                    }, 1000);
+                }
+            }
 
-                    fr.readAsText(this.files[0]);
-                });
+            (() => {
+                document
+                   .getElementById("jsonFile")
+                   .addEventListener("change", function () {
+                       var fr = new FileReader();
+                       fr.onload = function () {
+                           fileInput = fr.result;
+                           loadFile.disabled = false;
+
+                           if(!uploadFile.classList.contains("positiveHightlight")){
+                            uploadFile.classList.add("positiveHightlight");
+                           }
+                       };
+   
+   
+                       fr.readAsText(this.files[0]);
+                   });
+
+                   loadLastQuery();
+            })()
         </script>
 
         <script src="dist/bundle.js"></script>

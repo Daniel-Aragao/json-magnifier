@@ -7,6 +7,7 @@ This projects purpose is to provide a simple script to run queries on json files
 ## Web version
 
 Hosted as a github page you can
+
 1. Load the JSON file
 2. or paste the JSON data directly in the `Data...` field
 3. or even edit the loaded JSON file by click one button

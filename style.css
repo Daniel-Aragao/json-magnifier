@@ -1,13 +1,26 @@
 :root {
     --input-bg: #161b22;
     --main-bg: #0d1116;
-    --main-bg-darker: #11151a;
-    --border-color: #30363d;
+    --main-bg-darker: #070708;
     --color-btn-bg: #21262d;
+    --positive-bg: #00695c;
+
+    --border-color: #30363d;
     --border-radius: 6px;
     --gradient-color-1: #e36a34;
     --gradient-color-2: #c65356;
     --gradient-color-3: #e14a96;
+
+    --border-image: linear-gradient(
+        var(--gradient-color-1),
+        var(--gradient-color-2),
+        var(--gradient-color-3)
+    )
+    15;
+
+    --box-shadow: 0px 0px 3px 0 var(--gradient-color-1),
+    0px 0px 3px 0 var(--gradient-color-2),
+    0px 0px 3px 0 var(--gradient-color-3)
 }
 
 /* Scroll bar */
@@ -87,15 +100,8 @@ div.flex-start {
 .queryArea:focus {
     outline: none !important;
     border: 1px solid;
-    border-image: linear-gradient(
-            var(--gradient-color-1),
-            var(--gradient-color-2),
-            var(--gradient-color-3)
-        )
-        30;
-    box-shadow: 0px 0px 3px 0 var(--gradient-color-1),
-        0px 0px 3px 0 var(--gradient-color-2),
-        0px 0px 3px 0 var(--gradient-color-3);
+    border-image: var(--border-image);
+    /* box-shadow: var(--box-shadow); */
 }
 
 .queryArea {
@@ -145,19 +151,40 @@ img.icon {
 }
 
 .dataArea,
-#result {
+.resultArea {
     align-self: stretch;
     min-width: 100px;
     min-height: 500px;
     background-color: var(--input-bg);
 }
 
-#result {
+.resultArea {
     padding: 2px;
     border: 1px solid;
     border-color: var(--border-color);
     background-color: var(--main-bg-darker);
     margin: 0;
+}
+
+.resultContainer {
+    margin: 0;
+}
+
+.copyButton {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    float: right;
+    margin: -2px;
+    transition: 0.3s ease-out;
+    border: 0;
+    border-radius: 0;
+    border-bottom-left-radius: 5px;
+}
+
+.positiveHightlight {
+    border: 1px solid var(--border-color);
+    border-image: var(--border-image);
 }
 
 .double-panel {
