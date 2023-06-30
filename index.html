@@ -29,6 +29,7 @@
                 <pre id="hiddenInfo"></pre>
             </div>
             <div class="quickMessage"></div>
+            <div id="historyContainer" class="card-list hide"></div>
             <div class="box-container">
                 <div class="box">
                     <span>
@@ -76,6 +77,12 @@
                 </div>
                 <div class="box">
                     <span>
+                        <button
+                            onclick="showHistory(this)"
+                            title="Run history"
+                        >
+                            <img src="./icons/clock.png"class="icon">
+                        </button>
                         <button onclick="reset()" title="Reset all">
                             <img src="./icons/reset.png" class="icon" />
                         </button>
@@ -110,7 +117,10 @@
             let fileInput = undefined;
             let loadedData = undefined;
             let inputData = undefined;
+            let visibleHistory = false;
 
+            const QUERY_HISTORY = "QUERY_HISTORY";
+            const QUERY_HISTORY_LIMIT = 100;
             const LAST_QUERY = "LAST_QUERY";
             const LAST_QUERY_COUNT = "LAST_QUERY_COUNT";
             const LAST_QUERY_JSON = "LAST_QUERY_COUNT_JSON";
@@ -118,6 +128,7 @@
             function runCode() {
                 try {
                     saveLastQuery();
+                    addToHistory();
                     inputData = JSON.parse(data.value || fileInput);
 
                     loadedData = magnifier.runQuery(
@@ -128,6 +139,7 @@
 
                     result.innerText = JSON.stringify(loadedData, undefined, 2);
                     updateInfo();
+                    updateHistoryContainer();
                 } catch (e) {
                     result.innerText = "Error running query";
                     console.error(e);
@@ -233,6 +245,137 @@
                     hiddenInfo.innerText = "Information only available for lists"
                 }
             }
+            
+            ////////////////////////////
+            ////////// History /////////
+            ////////////////////////////
+
+            function addToHistory() {
+                let history = JSON.parse(localStorage.getItem(QUERY_HISTORY));
+
+                if(!history) {
+                    history = []
+                }
+
+                const lastHistory = history[history.length - 1];
+
+                const newHistory = {
+                    query: query.value,
+                    toCount: toCount.checked,
+                    data: data.value,
+                    date: new Date()
+                };
+
+                if(!lastHistory || !historyEqual(newHistory, lastHistory)) {
+                    
+                    replaceRepeated(newHistory, history)
+
+                    history.push(newHistory);
+                    
+                    ensureLimit(history);
+    
+                    localStorage.setItem(QUERY_HISTORY, JSON.stringify(history));
+                }
+            }
+
+            function historyEqual(h1, h2){
+                return h1.query === h2.query && h1.toCount === h2.toCount && h1.data === h2.data;
+            }
+            
+            function replaceRepeated(newHistory, history) {
+                const index = history.findIndex((v, i) => historyEqual(newHistory, v));
+
+                if(index >= 0) {
+                    history.splice(index, 1);
+                }
+            }
+
+            function ensureLimit(history) {
+                if(history?.length > QUERY_HISTORY_LIMIT) {
+                    history.reverse().pop();
+                    history.reverse();
+                }
+            }
+
+            function showHistory(btn) {
+                if(btn.classList.contains("pressed")) {
+                    visibleHistory = false;
+                    historyContainer.classList.add("hide");
+                    btn.classList.remove("pressed");
+                } else {
+                    visibleHistory = true;
+                    
+                    updateHistoryContainer();
+                    historyContainer.classList.remove("hide");
+
+                    btn.classList.add("pressed");
+                }
+            }
+
+            function updateHistoryContainer() {
+                if(visibleHistory) {
+                    let history = JSON.parse(localStorage.getItem(QUERY_HISTORY));
+    
+                    if(history?.length) {
+                        historyContainer.innerHTML = "";
+                        historyContainer.append(...history.map(generateHistoryCard).reverse());
+                    }
+                }
+            }
+
+            function generateHistoryCard(historyLog) {
+                const card = document.createElement("div");
+                card.classList.add("card");
+
+                const cardQuery = document.createElement("div");
+                cardQuery.classList.add("card-header");
+                cardQuery.innerText = historyLog.query;
+                
+                const cardData = document.createElement("div");
+                cardData.classList.add("card-data");
+
+                const cardDataText = document.createElement("pre");
+                cardDataText.classList.add("card-data-text");
+                cardDataText.innerText = historyLog.data;
+                
+                const cardTags = document.createElement("div");
+                cardTags.classList.add("card-tags");
+
+                if(historyLog.toCount){
+
+                    const cardToCount = document.createElement("a");
+                    cardToCount.classList.add("card-tag");
+                    cardToCount.innerText = "Count";
+    
+                    cardTags.append(cardToCount)
+                }
+
+                if(historyLog.date){
+
+                    const cardTime = document.createElement("span");
+                    cardTime.classList.add("card-time");
+                    cardTime.innerText = historyLog.date;
+
+                    card.append(cardTime)
+                }
+
+                cardData.append(cardDataText);
+                card.append(cardQuery);
+                card.append(cardData);
+                card.append(cardTags);
+
+                card.onclick = () => {
+                    query.value = historyLog.query;
+                    toCount.checked = historyLog.toCount;
+                    data.value = historyLog.data;
+                }
+
+                return card;
+            }
+
+            ////////////////////////////
+            //////// Bootstrap /////////
+            ////////////////////////////
 
             (() => {
                 document
