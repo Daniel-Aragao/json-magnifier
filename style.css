@@ -309,7 +309,7 @@ div.header > a {
     max-height: 0;
     transition: 1s;
     padding: 0;
-    overflow-x: hidden;
+    overflow: hidden;
     display: flex;
 }
 
