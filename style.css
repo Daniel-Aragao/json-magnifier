@@ -21,7 +21,13 @@
     --box-shadow: 0px 0px 3px 0 var(--gradient-color-1),
     0px 0px 3px 0 var(--gradient-color-2),
     0px 0px 3px 0 var(--gradient-color-3)
+
+    --card-transition: 1s linear;
 }
+
+/* /////////// */
+/*  Scroll bar */
+/* /////////// */
 
 /* Scroll bar */
 /* width */
@@ -127,7 +133,7 @@ input[type="file"]::file-selector-button {
     cursor: pointer;
     background-color: var(--color-btn-bg);
     border-color: var(--border-color);
-    border-radius: var(--border-radius);
+    /* border-radius: var(--border-radius); */
 }
 button:hover,button.pressed,
 input[type="file"]::file-selector-button:hover {
@@ -289,4 +295,137 @@ div.header > a {
 .quickMessage:empty {
     height: 0;
     padding: 0;
+}
+
+/* /////////// */
+/*   History   */
+/* /////////// */
+
+.historyContainer{
+    margin: 10px 0;
+}
+
+.card-list {
+    max-height: 0;
+    transition: 1s;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex;
+}
+
+.card-list:not(.hide) {
+    max-height: 350px;
+    padding: 3rem;
+    margin-bottom: 10px;
+    overflow-x: scroll;
+}
+
+.card {
+    height: 200px;
+    width: 100px;
+    min-width: 250px;
+    padding: 1.5rem;
+    background: var(--main-bg);
+    box-shadow: -1rem 0 3rem #000;
+    display: flex;
+    flex-direction: column;
+    transition: .2s;
+    margin: 0;
+    scroll-snap-align: start;
+    clear: both;
+    position: relative;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.card * {
+    cursor: pointer;
+}
+
+.card:focus-within~.card, .card:hover~.card {
+    transform: translateX(130px);
+}
+
+.card:hover {
+    transform: translateY(-1rem);
+}
+
+.card:not(:first-child) {
+    margin-left: -130px;
+}
+
+.card-header {
+    flex: 1;
+}
+
+.card-header p {
+    font-size: 14px;
+    margin: 0 0 1rem;
+    color: #7a7a8c;
+}
+
+.card-header h2 {
+    font-size: 20px;
+    margin: .25rem 0 auto;
+    text-decoration: none;
+    color: inherit;
+    border: 0;
+    display: inline-block;
+}
+
+.card-header h2:hover {
+    background: linear-gradient(90deg,#ff8a00,#e52e71);
+    text-shadow: none;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.card-data {
+    height: 100px;
+    width: 250px;
+    overflow: hidden;
+    background-color: var(--main-bg-darker);
+    border: 1px solid var(--border-color);
+    padding: 0px 5px 2px 5px;
+    flex: 4;
+}
+
+.card:hover .card-data {
+    border-image: var(--border-image);
+}
+
+.card-data-text {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.card-tags {
+    /* padding: .5rem 0 1rem; */
+    line-height: 2;
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.card-tags .card-tag {
+    font-style: normal;
+    font-weight: 700;
+    font-size: .5rem;
+    color: white;
+    font-size: .66rem;
+    border: 2px solid var(--border-color);
+    border-radius: 2rem;
+    padding: .2rem .85rem .25rem;
+    position: relative;
+}
+
+.card-time {
+    font-size: 0.5rem;
+    color: #7e7e7e;
+    /* margin: 2px; */
+    position: absolute;
+    bottom: 0.3rem;
 }
