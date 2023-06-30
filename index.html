@@ -28,14 +28,12 @@
             <div class="row hidden" id="hiddenInfoContainer">
                 <pre id="hiddenInfo"></pre>
             </div>
+            <div class="quickMessage"></div>
             <div class="box-container">
                 <div class="box">
                     <span>
                         <button onclick="runCode()">
-                            <span class="icon-group">
-                                <img src="./icons/play.png" class="icon" />
-                                Run
-                            </span>
+                            <img src="./icons/play.png" class="icon" />
                         </button>
                         <label
                             class="toCount"
@@ -85,17 +83,22 @@
                 </div>
             </div>
             <div class="double-panel">
-                <textarea
-                    class="dataArea"
-                    name="json-data"
-                    id="data"
-                    placeholder="Data..."
-                ></textarea>
+                <div class="dataArea">
+                    <button onclick="beautifyData()" title="List information" class="absoluteButton">
+                        <img src="./icons/magic-wand.png" class="icon">
+                    </button>
+                    <textarea
+                        class="dataTextArea"
+                        name="json-data"
+                        id="data"
+                        placeholder="Data..."
+                    ></textarea>
+                </div>
                 <div class="resultArea">
                     <button onclick="copy()" title="Copy" class="copyButton">
                         <img src="./icons/copy.png" class="icon">
                     </button>
-                    <button onclick="showInfo()" title="List information" class="copyButton">
+                    <button onclick="showInfo(this)" title="List information" class="copyButton">
                         <img src="./icons/information.png" class="icon">
                     </button>
                     <pre class="resultContainer" id="result"></pre>
@@ -180,13 +183,31 @@
                 }
             }
 
-            function showInfo() {
+            function showInfo(btn) {
                 if(hiddenInfoContainer.classList.contains("hidden")) {
                     hiddenInfoContainer.classList.remove("hidden");
                     updateInfo();
+                    btn.classList.add("pressed");
                 } else {
+                    btn.classList.remove("pressed");
                     hiddenInfoContainer.classList.add("hidden");
                 }
+            }
+
+            function beautifyData() {
+                try{
+                    const pretty = JSON.parse(data.value);
+                    data.value = JSON.stringify(pretty, undefined, 2);
+                }catch{
+                    showQuickMessage("Invalid JSON");
+                }
+            }
+
+            function showQuickMessage(txt){
+                const quickMessage = document.getElementsByClassName("quickMessage")[0]
+                quickMessage.innerText = txt;
+
+                setTimeout(() => quickMessage.innerText = "", 1500)
             }
 
             function updateInfo() {

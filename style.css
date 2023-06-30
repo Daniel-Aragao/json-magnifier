@@ -99,7 +99,7 @@ div.flex-start {
     border: 1px solid var(--border-color);
 }
 
-.dataArea:focus,
+.dataTextArea:focus,
 .queryArea:focus {
     outline: none !important;
     border: 1px solid;
@@ -129,7 +129,7 @@ input[type="file"]::file-selector-button {
     border-color: var(--border-color);
     border-radius: var(--border-radius);
 }
-button:hover,
+button:hover,button.pressed,
 input[type="file"]::file-selector-button:hover {
     background-color: var(--border-color);
 }
@@ -153,12 +153,27 @@ img.icon {
     height: 15px;
 }
 
-.dataArea,
+.dataArea, 
 .resultArea {
     align-self: stretch;
     min-width: 100px;
     min-height: 500px;
     background-color: var(--input-bg);
+}
+
+.dataTextArea {
+    background-color: var(--input-bg);
+    border: none;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    resize: vertical;
+}
+
+.dataArea .dataTextArea {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .resultArea {
@@ -169,11 +184,17 @@ img.icon {
     margin: 0;
 }
 
+.dataArea .absoluteButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .resultContainer {
     margin: 0;
 }
 
-.copyButton {
+.copyButton,.absoluteButton {
     width: 32px;
     height: 32px;
     padding: 0;
@@ -185,7 +206,7 @@ img.icon {
     margin-left: 2px
 }
 
-.copyButton:last-of-type {
+.copyButton:last-of-type, .absoluteButton:first-of-type {
     border-bottom-left-radius: 5px;
 }
 
@@ -203,6 +224,7 @@ img.icon {
 .double-panel > * {
     flex: 1;
     overflow: auto;
+    position: relative;
 }
 
 div.header {
@@ -253,6 +275,18 @@ div.header > a {
 }
 
 #hiddenInfoContainer{
-    background-color: #070708;
+    background-color: var(--main-bg-darker);
     padding: 0 15px;
+}
+
+.quickMessage {
+    background-color: var(--main-bg-darker);
+    transition: .2s;
+    margin-bottom: 10px;
+    padding: 13px;
+}
+
+.quickMessage:empty {
+    height: 0;
+    padding: 0;
 }
