@@ -92,7 +92,7 @@ function showQuickMessage(txt) {
     const quickMessage = document.getElementsByClassName("quickMessage")[0];
     quickMessage.innerText = txt;
 
-    setTimeout(() => (quickMessage.innerText = ""), 1500);
+    setTimeout(() => (quickMessage.innerText = ""), 2000);
 }
 
 function updateInfo() {
