@@ -88,15 +88,6 @@ function showInfo(btn) {
     }
 }
 
-function beautifyData() {
-    try {
-        const pretty = JSON.parse(data.value);
-        data.value = JSON.stringify(pretty, undefined, 2);
-    } catch {
-        showQuickMessage("Invalid JSON");
-    }
-}
-
 function showQuickMessage(txt) {
     const quickMessage = document.getElementsByClassName("quickMessage")[0];
     quickMessage.innerText = txt;
