@@ -91,9 +91,17 @@
             </div>
             <div class="double-panel">
                 <div class="dataArea">
-                    <button onclick="beautifyData()" title="List information" class="absoluteButton">
-                        <img src="./icons/magic-wand.png" class="icon">
-                    </button>
+                    <div class="data-buttons">
+                        <button onclick="beautifyData()" title="Beautify" class="iconButton">
+                            <img src="./icons/magic-wand.png" class="icon">
+                        </button>
+                        <button onclick="convertTableToJson()" title="From table" class="iconButton">
+                            <img src="./icons/tabledb.png" class="icon">
+                        </button>
+                        <button onclick="convertFromCSV()" title="From table" class="iconButton">
+                            <img src="./icons/csvfile.png" class="icon">
+                        </button>
+                    </div>
                     <textarea
                         class="dataTextArea"
                         name="json-data"
@@ -102,10 +110,10 @@
                     ></textarea>
                 </div>
                 <div class="resultArea">
-                    <button onclick="copy()" title="Copy" class="copyButton">
+                    <button onclick="copy()" title="Copy" class="iconButton">
                         <img src="./icons/copy.png" class="icon">
                     </button>
-                    <button onclick="showInfo(this)" title="List information" class="copyButton">
+                    <button onclick="showInfo(this)" title="List information" class="iconButton">
                         <img src="./icons/information.png" class="icon">
                     </button>
                     <pre class="resultContainer" id="result"></pre>
@@ -115,6 +123,8 @@
 
         <script src="./js/main.js"></script>
         <script src="./js/history.js"></script>
+        <script src="./js/convert.js"></script>
+        <script src="./js/tableToJson.js"></script>
         <script src="dist/bundle.js"></script>
     </body>
 </html>

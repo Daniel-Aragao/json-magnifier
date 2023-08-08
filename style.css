@@ -198,7 +198,7 @@ img.icon {
     margin: 0;
 }
 
-.dataArea .absoluteButton {
+.dataArea .data-buttons {
     position: absolute;
     top: 0;
     right: 0;
@@ -208,7 +208,7 @@ img.icon {
     margin: 0;
 }
 
-.copyButton,.absoluteButton {
+.iconButton {
     width: 32px;
     height: 32px;
     padding: 0;
@@ -220,7 +220,7 @@ img.icon {
     margin-left: 2px
 }
 
-.copyButton:last-of-type, .absoluteButton:first-of-type {
+.iconButton:last-of-type{
     border-bottom-left-radius: 5px;
 }
 
