@@ -56,7 +56,7 @@ function reset() {
     query.value = "";
     toCount.checked = false;
     jsonFile.value = "";
-    loadFile.disabled = true;
+    loadFileBtn.disabled = true;
     fileInput = undefined;
 
     if (uploadFile.classList.contains("positiveHightlight")) {
@@ -132,7 +132,7 @@ function updateInfo() {
         var fr = new FileReader();
         fr.onload = function () {
             fileInput = fr.result;
-            loadFile.disabled = false;
+            loadFileBtn.disabled = false;
 
             if (!uploadFile.classList.contains("positiveHightlight")) {
                 uploadFile.classList.add("positiveHightlight");
