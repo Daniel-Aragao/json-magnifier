@@ -182,6 +182,7 @@ img.icon {
     height: 100%;
     color: inherit;
     resize: vertical;
+    min-height: 100%;
 }
 
 .dataArea .dataTextArea {
@@ -198,10 +199,14 @@ img.icon {
     margin: 0;
 }
 
+.double-panel > .dataArea {
+    overflow: hidden;
+} 
+
 .dataArea .data-buttons {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 2px;
+    right: 2px;
 }
 
 .resultContainer {

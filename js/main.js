@@ -8,6 +8,7 @@ const QUERY_HISTORY_LIMIT = 100;
 const LAST_QUERY = "LAST_QUERY";
 const LAST_QUERY_COUNT = "LAST_QUERY_COUNT";
 const LAST_QUERY_JSON = "LAST_QUERY_COUNT_JSON";
+const UI_DELAY = 2000;
 
 function runCode() {
     try {
@@ -23,7 +24,7 @@ function runCode() {
         updateInfo();
         updateHistoryContainer();
     } catch (e) {
-        result.innerText = "Error running query";
+        showQuickMessage("Error running query")
         console.error(e);
     }
 }
@@ -64,16 +65,16 @@ function reset() {
     }
 }
 
-function copy() {
-    if (result.innerText?.trim()) {
-        navigator.clipboard.writeText(result.innerText);
-        const btn = document.getElementsByClassName("copyButton")[0];
+function copy(btn, field) {
+    const text = field.innerText || field.value;
+    if (text?.trim()) {
+        navigator.clipboard.writeText(text);
 
         btn.classList.add("positiveHightlight");
 
         setTimeout(() => {
             btn.classList.remove("positiveHightlight");
-        }, 1000);
+        }, UI_DELAY);
     }
 }
 
@@ -92,7 +93,7 @@ function showQuickMessage(txt) {
     const quickMessage = document.getElementsByClassName("quickMessage")[0];
     quickMessage.innerText = txt;
 
-    setTimeout(() => (quickMessage.innerText = ""), 2000);
+    setTimeout(() => (quickMessage.innerText = ""), UI_DELAY);
 }
 
 function updateInfo() {

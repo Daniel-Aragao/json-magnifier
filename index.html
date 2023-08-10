@@ -92,6 +92,9 @@
             <div class="double-panel">
                 <div class="dataArea">
                     <div class="data-buttons">
+                        <button onclick="copy(this, data)" title="Copy" class="iconButton">
+                            <img src="./icons/copy.png" class="icon">
+                        </button>
                         <button onclick="beautifyData()" title="Beautify" class="iconButton">
                             <img src="./icons/magic-wand.png" class="icon">
                         </button>
@@ -110,7 +113,7 @@
                     ></textarea>
                 </div>
                 <div class="resultArea">
-                    <button onclick="copy()" title="Copy" class="iconButton">
+                    <button onclick="copy(this, result)" title="Copy" class="iconButton">
                         <img src="./icons/copy.png" class="icon">
                     </button>
                     <button onclick="showInfo(this)" title="List information" class="iconButton">
