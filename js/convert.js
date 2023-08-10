@@ -9,16 +9,24 @@ function beautifyData() {
 
 function convertTableToJson(delimiter = "\t") {
     try {
-        showQuickMessage("Using delimiter: " + (delimiter === "\t" ? "tab": delimiter))
-        const pretty = tableStringToJson(data.value, delimiter);
-        data.value = JSON.stringify(pretty, undefined, 2);
+        if(data.value.includes(delimiter)) {
+            showQuickMessage("Using delimiter: " + (delimiter === "\t" ? "tab": delimiter))
+            const pretty = tableStringToJson(data.value, delimiter);
+            data.value = JSON.stringify(pretty, undefined, 2);
+        } else {
+            showQuickMessage("Invalid table");
+        }
     } catch {
         showQuickMessage("Invalid table");
     }
 }
 
 function convertFromCSV() {
-    let delimter = prompt("Delimiter", ",");
+    let delimiter = prompt("Delimiter", ",");
 
-    convertTableToJson(delimter);
+    if(data.value.includes(delimiter)) {
+        convertTableToJson(delimiter);
+    } else {
+        showQuickMessage("Invalid Delimiter: " + delimiter);
+    }
 }
