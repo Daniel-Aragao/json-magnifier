@@ -89,13 +89,6 @@ function showInfo(btn) {
     }
 }
 
-function showQuickMessage(txt) {
-    const quickMessage = document.getElementsByClassName("quickMessage")[0];
-    quickMessage.innerText = txt;
-
-    setTimeout(() => (quickMessage.innerText = ""), UI_DELAY);
-}
-
 function updateInfo() {
     if (
         Array.isArray(loadedData) ||
