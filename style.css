@@ -298,7 +298,7 @@ div.header > a {
     padding: 0 15px;
 }
 
-.quickMessage {
+.quick-msg-container {
     background-color: var(--main-bg-darker);
     transition: .2s;
     margin-bottom: 10px;
@@ -306,7 +306,7 @@ div.header > a {
     width: 100%;
 }
 
-.quickMessage:empty {
+.quick-msg-container:empty {
     height: 0;
     padding: 0;
 }
