@@ -10,36 +10,30 @@ This projects purpose is to provide a simple script to run queries on json files
 
 ## Web version
 
-Hosted as a github page you can
-<style>
-  .icon {
-    background-color: white;
-    padding:3px;
-    width:12px;
-    height:12px
-  }
-</style>
+<link rel="stylesheet" href="readme-style.css">
+
+This version will feature:  
 
 * "**Query...**" field allows JSON-query inputs
 * "**Data...**" where JSON can be pasted to be queried
-* <img src="./icons/play.png" class="icon"/> will run the query
+* <img src="./icons/play.png" class="iconReadme"/> will run the query
 * "**Results...**" I will leave this up for your imagination
 * "**Count**" will group the results attributes in a single object with a added counter
 
-* <img src="./icons/file.png" class="icon"/> Load JSON or Excel files
-  * Files can be queried directly after loading it but pressing <img src="./icons/play.png" class="icon"/>
+* <img src="./icons/file.png" class="iconReadme"/> Load JSON or Excel files
+  * Files can be queried directly after loading it but pressing <img src="./icons/play.png" class="iconReadme"/>
   * The file will be ignored if the "**Data...**" field is not empty
-* <img src="./icons/edit.png" class="icon"/> Edit the loaded file
+* <img src="./icons/edit.png" class="iconReadme"/> Edit the loaded file
   * This prevent heavy files to slowdown the browser if automatically loading, it might not help for heavy excel files.
-* <img src="./icons/csvfile.png" class="icon"/> Convert from CSV to JSON
+* <img src="./icons/csvfile.png" class="iconReadme"/> Convert from CSV to JSON
   * The delimiter will be prompt
-* <img src="./icons/tabledb.png" class="icon"/> Convert from table to JSON
+* <img src="./icons/tabledb.png" class="iconReadme"/> Convert from table to JSON
   * For tables the "\t" delimiter is automatically set
-* <img src="./icons/magic-wand.png" class="icon"/> Beautify the "**Data...**" JSON text
-* <img src="./icons/copy.png" class="icon"/> Copy the "**Data..**." or "**Results...**" text to the clipboard
-* <img src="./icons/information.png" class="icon"/> Reveal the results json utility information if available
-* <img src="./icons/clock.png" class="icon"/> Reveal previous results/runs
-* <img src="./icons/reset.png" class="icon"/> Reset all the fields to its original state
+* <img src="./icons/magic-wand.png" class="iconReadme"/> Beautify the "**Data...**" JSON text
+* <img src="./icons/copy.png" class="iconReadme"/> Copy the "**Data..**." or "**Results...**" text to the clipboard
+* <img src="./icons/information.png" class="iconReadme"/> Reveal the results json utility information if available
+* <img src="./icons/clock.png" class="iconReadme"/> Reveal previous results/runs
+* <img src="./icons/reset.png" class="iconReadme"/> Reset all the fields to its original state
 
 > Be aware that large files may cause your browser to slowdown and may not be suited for editing. In this case if using a list you can first query by "[1]" to filter a single item to help you build the query
 
