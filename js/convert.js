@@ -22,11 +22,34 @@ function convertTableToJson(delimiter = "\t") {
 }
 
 function convertFromCSV() {
-    let delimiter = prompt("Delimiter", ",");
+    let delimiter = promptUser("Delimiter", ",");
 
-    if(data.value.includes(delimiter)) {
-        convertTableToJson(delimiter);
-    } else {
-        showQuickMessage("Invalid Delimiter: " + delimiter);
+    if(delimiter) {
+        if(data.value.includes(delimiter)) {
+            convertTableToJson(delimiter);
+        } else {
+            showQuickMessage("Invalid Delimiter: " + delimiter);
+        }
+    }
+}
+
+function convertFromExcel(fileArrayBuffer) {
+    try{
+        let workbook = xlsx.read(fileArrayBuffer);
+        let sheets = workbook?.Sheets
+
+        let firstHeader = Number(promptUser("Header first column", "A"));
+        let firstLine = Number(promptUser("First line", 0));
+
+        let options = {header: firstHeader, raw: false, range: firstLine, defval: ''};
+
+        let result = workbook.SheetNames.reduce((result, sheetName) => {
+            result[sheetName] = xlsx.utils.sheet_to_json(sheets[sheetName], options)
+            return result;
+        }, {});
+
+        return JSON.stringify(result);
+    } catch(e) {
+        showQuickMessage("Invalid sheet");
     }
 }

@@ -71,7 +71,7 @@
                         type="file"
                         name="jsonFile "
                         id="jsonFile"
-                        accept=".json"
+                        accept=".json,.xlsx,.xls,.csv"
                         hidden
                     />
                 </div>
@@ -119,7 +119,7 @@
                     <button onclick="showInfo(this)" title="List information" class="iconButton">
                         <img src="./icons/information.png" class="icon">
                     </button>
-                    <pre class="resultContainer" id="result"></pre>
+                    <pre class="resultContainer" id="result">Results...</pre>
                 </div>
             </div>
         </div>
@@ -130,5 +130,6 @@
         <script src="./js/convert.js"></script>
         <script src="./js/tableToJson.js"></script>
         <script src="dist/bundle.js"></script>
+        <script src="dist/xlsx.bundle.js"></script>
     </body>
 </html>

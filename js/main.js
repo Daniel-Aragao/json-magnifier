@@ -53,7 +53,7 @@ function loadFile() {
 
 function reset() {
     data.value = "";
-    result.innerText = "";
+    result.innerText = "Results...";
     query.value = "";
     toCount.checked = false;
     jsonFile.value = "";
@@ -123,9 +123,17 @@ function updateInfo() {
 
 (() => {
     document.getElementById("jsonFile").addEventListener("change", function () {
-        var fr = new FileReader();
-        fr.onload = function () {
-            fileInput = fr.result;
+        let fileReader = new FileReader();
+        let file = this.files[0];
+        let isSheet = false;
+
+        fileReader.onload = function () {
+            if(isSheet) {
+                fileInput = convertFromExcel(fileReader.result);
+            } else {
+                fileInput = fileReader.result;
+            }
+
             loadFileBtn.disabled = false;
 
             if (!uploadFile.classList.contains("positiveHightlight")) {
@@ -133,7 +141,12 @@ function updateInfo() {
             }
         };
 
-        fr.readAsText(this.files[0]);
+        if(file.type === 'application/vnd.ms-excel' || file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+            isSheet = true;
+            fileReader.readAsArrayBuffer(file)
+        } else {
+            fileReader.readAsText(file);
+        }
     });
 
     loadLastQuery();
