@@ -16,7 +16,8 @@
   "author": "daniel-filho",
   "license": "ISC",
   "dependencies": {
-    "json-query": "^2.2.2"
+    "json-query": "^2.2.2",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "webpack": "^5.4.0",

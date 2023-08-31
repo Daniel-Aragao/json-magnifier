@@ -21,4 +21,8 @@ const showQuickMessage = (() => {
             counter = 0;
         }, UI_DELAY);
     }
-})()
+})();
+
+const promptUser = (() => {
+    return prompt;
+})();

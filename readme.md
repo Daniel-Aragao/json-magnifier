@@ -4,30 +4,91 @@ This projects purpose is to provide a simple script to run queries on json files
 
 > The project might also be found in [web version](https://daniel-aragao.github.io/json-magnifier/)
 
-## Web version
-
-Hosted as a github page you can
-
-1. Load the JSON file
-2. or paste the JSON data directly in the `Data...` field
-3. or even edit the loaded JSON file by click one button
-4. Write a query
-5. Get the results by pressing `Run`
-   1. If there is a large dataset been imported you can also click on `Count` to group list of strings of list of objects
-
-> Be aware that large files may cause your browser to slowdown and may not be suited for editing. In this case if using a list you can first query by "[1]" to filter a single item to help you build the query
-
-![guide](/misc/imgs/guide.png)
-
-Sample of query
-![guide](/misc/imgs/sample%201.png)
-Sample of `Count`
-![guide](/misc/imgs/sample%202.png)
-
-Credits to [SWAPI](https://swapi.dev/) for the data used
 ## Dependencies
 
 * json-query@^2.2.2
+
+## Web version
+
+Hosted as a github page you can
+<style>
+  .icon {
+    background-color: white;
+    padding:3px;
+    width:12px;
+    height:12px
+  }
+</style>
+
+* "**Query...**" field allows JSON-query inputs
+* "**Data...**" where JSON can be pasted to be queried
+* <img src="./icons/play.png" class="icon"/> will run the query
+* "**Results...**" I will leave this up for your imagination
+* "**Count**" will group the results attributes in a single object with a added counter
+
+* <img src="./icons/file.png" class="icon"/> Load JSON or Excel files
+  * Files can be queried directly after loading it but pressing <img src="./icons/play.png" class="icon"/>
+  * The file will be ignored if the "**Data...**" field is not empty
+* <img src="./icons/edit.png" class="icon"/> Edit the loaded file
+  * This prevent heavy files to slowdown the browser if automatically loading, it might not help for heavy excel files.
+* <img src="./icons/csvfile.png" class="icon"/> Convert from CSV to JSON
+  * The delimiter will be prompt
+* <img src="./icons/tabledb.png" class="icon"/> Convert from table to JSON
+  * For tables the "\t" delimiter is automatically set
+* <img src="./icons/magic-wand.png" class="icon"/> Beautify the "**Data...**" JSON text
+* <img src="./icons/copy.png" class="icon"/> Copy the "**Data..**." or "**Results...**" text to the clipboard
+* <img src="./icons/information.png" class="icon"/> Reveal the results json utility information if available
+* <img src="./icons/clock.png" class="icon"/> Reveal previous results/runs
+* <img src="./icons/reset.png" class="icon"/> Reset all the fields to its original state
+
+> Be aware that large files may cause your browser to slowdown and may not be suited for editing. In this case if using a list you can first query by "[1]" to filter a single item to help you build the query
+
+<details>
+  <summary>Old samples</summary>
+
+* Guide
+  ![guide](/misc/imgs/guide.png)
+
+* Sample of query
+  ![guide](/misc/imgs/sample%201.png)
+* Sample of `Count`
+  ![guide](/misc/imgs/sample%202.png)
+
+</details>
+
+### Excel
+
+To work with Excel, the sheet **header** and **start-line** need to be informed
+
+<details>
+  <summary> Examples </summary>
+
+* **A** / **0**
+  |   | A | B | C | D | E | F |
+  |---|---|---|---|---|---|---|
+  | 1 | h | e | a | d | e | r |
+  | 2 | i | t | e | m | - | 1 |
+  | 3 | i | t | e | m | - | 2 |
+  | 4 | i | t | e | m | - | 3 |
+
+* **B** / **0**
+  |   | A | B | C | D | E | F | G |
+  |---|---|---|---|---|---|---|---|
+  | 1 |   | h | e | a | d | e | r |
+  | 2 |   | i | t | e | m | - | 1 |
+  | 3 |   | i | t | e | m | - | 2 |
+  | 4 |   | i | t | e | m | - | 3 |
+
+* **B** / **1**
+  |   | A | B | C | D | E | F | G |
+  |---|---|---|---|---|---|---|---|
+  | 1 |   |   |   |   |   |   |   |
+  | 2 |   | h | e | a | d | e | r |
+  | 3 |   | i | t | e | m | - | 1 |
+  | 4 |   | i | t | e | m | - | 2 |
+  | 5 |   | i | t | e | m | - | 3 |
+
+</details>
 
 ## Run
 
@@ -213,3 +274,7 @@ If the informed field is an array pick the first or last item of the field
   "https://swapi.dev/api/films/1/"
 ]
 ```
+
+## Credits
+
+* [SWAPI](https://swapi.dev/) for the data used  
