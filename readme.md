@@ -269,6 +269,22 @@ If the informed field is an array pick the first or last item of the field
 ]
 ```
 
+### :sum
+
+The informed keys will be added and the result will be an object with the added numbers per key
+
+```text
+:sum(mass, height)
+```
+
+```JSON
+{
+  "mass": 320,
+  "height": 637
+}
+```
+
+
 ## Credits
 
 * [SWAPI](https://swapi.dev/) for the data used  
